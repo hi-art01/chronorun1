@@ -1,6 +1,6 @@
 # Paragraph to Google Form
 
-This script reads a paragraph from a text file, extracts questions from it, and then uses the Google Forms API to create a new Google Form with those questions.
+This web application allows you to paste a paragraph of text, and it will create a Google Form with the questions it finds in the text.
 
 ## Prerequisites
 
@@ -31,19 +31,25 @@ This script reads a paragraph from a text file, extracts questions from it, and 
     - Follow the instructions [here](https://developers.google.com/workspace/guides/configure-oauth-consent).
     - For "User Type," select "Internal" if you are a Google Workspace user, otherwise select "External."
 
-3.  **Create credentials for a desktop application.**
-    - Follow the instructions [here](https://developers.google.com/workspace/forms/api/quickstart/python#authorize_credentials_for_a_desktop_application).
+3.  **Create credentials for a web application.**
+    - In the Google Cloud Console, go to the [Credentials page](https://console.cloud.google.com/apis/credentials).
+    - Click "Create Credentials" and select "OAuth client ID."
+    - Select "Web application" as the application type.
+    - Add `http://localhost:5000/oauth2callback` and `http://127.0.0.1:5000/oauth2callback` to the "Authorized redirect URIs."
+    - Click "Create."
     - Download the JSON file and save it as `client_secrets.json` in the root directory of this project.
 
-## Running the Script
+## Running the Application
 
-1.  Add the paragraph you want to convert to a Google Form in the `paragraph.txt` file.
-
-2.  Run the script:
+1.  Run the Flask application:
     ```bash
-    python main.py
+    python app.py
     ```
 
-3.  The first time you run the script, you will be prompted to authorize access. Follow the on-screen instructions.
+2.  Open your web browser and go to `http://localhost:5000`.
 
-4.  Once the script has run successfully, it will print the ID of the newly created form.
+3.  The first time you use the application, you will be prompted to authorize access. Follow the on-screen instructions.
+
+4.  Paste your paragraph into the text area and click "Create Form."
+
+5.  Once the form is created, you will see a success message with the form ID.
